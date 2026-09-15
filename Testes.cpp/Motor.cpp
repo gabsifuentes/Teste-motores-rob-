@@ -1,19 +1,20 @@
-//motor a
+// Motor a
 #define in1 = 5;
 #define in2 = 6;
-//motor b
+// Motor b
 #define in3 = 9;
 #define in4 = 10;
-//velocidade
+// Velocidade
 #define vel = 255;
 
 void setup(){
     Serial.begin(9600);
-    //pinos motores
+    //Pinos motores
     pinMode(in1, OUTPUT);
     pinMode(in2, OUTPUT);
     pinMode(in3, OUTPUT);
     pinMode(in4, OUTPUT);
+
     pararMotores();
     Menu();
 
@@ -57,7 +58,7 @@ void AB_horario(){
 //---------- Menu ----------
 
 void Menu(){
-    Serial.println("======= Menu =======");
+    Serial.println("   =======  Menu  =======   ");
     Serial.println("1 - Motor A horario");
     Serial.println("2 - Motor A anti-horario");
     Serial.println("3- Motor B horario");
@@ -65,8 +66,7 @@ void Menu(){
     Serial.println("5 - Parar motores");
     Serial.println("6 - Motores horario");
     Serial.println("7 - Testar PWM");
-    Serial.println("=====================");
+    Serial.println("    =====================    ");
 }
+
 //---------- Processamento ----------
-
-
