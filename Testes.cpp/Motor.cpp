@@ -66,16 +66,16 @@ void loop(){
 
     //testes individuais
     motorA_h(150);
-    delay(50);
+    delay(500);
     
     motorA_antihorario(150);
-    delay(50);
+    delay(500);
 
     motorB_horario(150);
-    delay(50);
+    delay(500);
 
     motorB_antihorario(150);
-    delay(50);
+    delay(500);
 
     //incementrando velocidade nos dois motores de 0 até 255 (frente)
      for(int v = 0; v <= 255; v+= 25){
