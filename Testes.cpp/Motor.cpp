@@ -25,7 +25,7 @@ void motorA_h(){
     digitalWrite(in2, LOW);
 }
 
-void motorA_antihorario()){
+void motorA_antihorario(){
     digitalWrite(in1, LOW);
     analogWrite(in2, vel);
 }
@@ -35,7 +35,7 @@ void motorB_horario(){
     digitalWrite(in4, LOW);
 }
 
-void motorB_antihorario()){
+void motorB_antihorario(){
     digitalWrite(in3, LOW);
     analogWrite(in4 vel);
 }
