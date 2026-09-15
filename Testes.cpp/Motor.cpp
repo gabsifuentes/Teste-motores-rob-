@@ -17,7 +17,6 @@ void motorB_antihorario();
 void pararMotores();
 void motoresHorario();
 
-
 //---------- Execução ----------
 
 void setup(){
@@ -31,7 +30,6 @@ void setup(){
     int vel = 255;
 
     pararMotores();
-    
 }
 
 void loop(){
