@@ -32,15 +32,21 @@ void setup(){
     pinMode(in2, OUTPUT);
     pinMode(in3, OUTPUT);
     pinMode(in4, OUTPUT);
+    pinMode(enA, OUTPUT);
+    pinMode(enB, OUTPUT);
+    // Saida motores
+    digitalWrite(enA, HIGH);
+    digitalWrite(enB, HIGH);
+
     // Pino PWM
-  
+    Menu();
 
     pararMotores();
 }
 
 void loop(){
 
-    Menu();
+    
     // Ler entrada
     if (Serial.available()) {
     int entrada = Serial.readStringUntil('\n').toInt(); 
