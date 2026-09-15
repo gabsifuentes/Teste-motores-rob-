@@ -63,7 +63,21 @@ void AB_antihorario(){
 
 //teste pwm
 void loop(){
-    //incementrando velocidade de 0 até 255 (frente)
+
+    //testes individuais
+    motorA_h(150);
+    delay(50);
+    
+    motorA_antihorario(150);
+    delay(50);
+
+    motorB_horario(150);
+    delay(50);
+
+    motorB_antihorario(150);
+    delay(50);
+
+    //incementrando velocidade nos dois motores de 0 até 255 (frente)
      for(int v = 0; v <= 255; v+= 25){
         Serial.println(v);
 
@@ -84,6 +98,4 @@ void loop(){
     //parando
     AB_parados();
     delay(500);
-
-
 }
