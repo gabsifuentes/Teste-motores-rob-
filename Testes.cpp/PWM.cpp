@@ -7,7 +7,7 @@ void setup(){
 void loop(){
 
     //pra acelerar o motor gradualmente
-    for(int pwm = 0; pwm <= 255; pwm++){
+    for(int pwm = 0; pwm <= 255; pwm+= 25){
         analogWrite(PWM, pwm);
         delay(30);
     }
@@ -15,7 +15,7 @@ void loop(){
     delay(1000);
 
     //desacelera gradualmente
-    for(int pwm = 0; pwm <= 255; pwm--){
+    for(int pwm = 0; pwm <= 255; pwm-= 25){
         analogWrite(PWM, pwm);
         delay(30);
     }
