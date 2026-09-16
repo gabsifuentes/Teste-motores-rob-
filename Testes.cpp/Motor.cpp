@@ -1,101 +1,154 @@
-//motor a
-#define in1 5
-#define in2 6
-//motor b
-#define in3 9
-#define in4 10
-//velocidade
-#define vel 255
+// Motor a
+#define in1 6
+#define in2 5
+// Motor b
+#define in3 4
+#define in4 3
+// vel dos motores
+#define enA 7
+#define enB 2
 
+
+//---------- Funções usadas ----------
+
+void Menu();
+void processarComando(int cmd);
+void testePWM();
+void motorA_horario();
+void motorA_antihorario();
+void motorB_horario();
+void motorB_antihorario();
+void pararMotores();
+void motoresHorario();
+
+int vel = 255;
+
+//---------- Execução ----------
 
 void setup(){
     Serial.begin(9600);
-    //pinos motores
+    // Pinos motores
     pinMode(in1, OUTPUT);
     pinMode(in2, OUTPUT);
     pinMode(in3, OUTPUT);
     pinMode(in4, OUTPUT);
-    
+    pinMode(enA, OUTPUT);
+    pinMode(enB, OUTPUT);
+    // Saida motores
+    digitalWrite(enA, HIGH);
+    digitalWrite(enB, HIGH);
+
+    // Pino PWM
+    Menu();
+
+    pararMotores();
 }
 
-// Funções de movimento
+void loop(){
 
-void motorA_h(){
+    
+    // Ler entrada
+    if (Serial.available()) {
+    int entrada = Serial.readStringUntil('\n').toInt(); 
+    processarComando(entrada);
+  }
+}
+
+//---------- Menu ----------
+
+void Menu(){
+
+    Serial.println("   =======  Menu  =======   ");
+    Serial.println("1 - Motor A horario");
+    Serial.println("2 - Motor A anti-horario");
+    Serial.println("3 - Motor B horario");
+    Serial.println("4 - Motor B anti-horario");
+    Serial.println("5 - Parar motores");
+    Serial.println("6 - Motores horario");
+    Serial.println("7 - Testar PWM");
+    Serial.println("   ======================    ");
+}
+
+//---------- Funções de movimento ----------
+
+void motorA_horario(){
+
     analogWrite(in1, vel);
     digitalWrite(in2, LOW);
 }
-
 void motorA_antihorario(){
+
     digitalWrite(in1, LOW);
     analogWrite(in2, vel);
 }
-
 void motorB_horario(){
+
     analogWrite(in3, vel);
     digitalWrite(in4, LOW);
 }
-
 void motorB_antihorario(){
-    digitalWrite(in3, LOW);
-    analogWrite(in4 vel);
-}
 
-void AB_parados(){
+    digitalWrite(in3, LOW);
+    analogWrite(in4, vel);
+}
+void pararMotores(){
+
     digitalWrite(in1, LOW);
     digitalWrite(in2, LOW);
     digitalWrite(in3, LOW);
     digitalWrite(in4, LOW);
 }
+void motoresHorario(){
 
-void AB_horario(){
     analogWrite(in1, vel);
     digitalWrite(in2, LOW);
     analogWrite(in3, vel);
     digitalWrite(in4, LOW);
 }
 
-void AB_antihorario(){
-    analogWrite(in1, LOW);
-    digitalWrite(in2, vel);
-    analogWrite(in3, LOW);
-    digitalWrite(in4, vel);
+//---------- PWM ----------
+
+void testePWM(){
+
+    Serial.println("Digite a velocidade (0-255):");
+    while (!Serial.available());
+    vel = Serial.readStringUntil('\n').toInt();
+    vel = constrain(vel, 0, 255);
+
+    Serial.println("Velocidade redefinida para: ");
+    Serial.print(vel);
 }
 
-//teste pwm
-void loop(){
+//---------- Processamento ----------
 
-    //testes individuais
-    motorA_h(150);
-    delay(500);
-    
-    motorA_antihorario(150);
-    delay(500);
+void processarComando(int cmd){
 
-    motorB_horario(150);
-    delay(500);
+    switch(cmd){
 
-    motorB_antihorario(150);
-    delay(500);
+        case 1: motorA_horario();
+                  break;
 
-    //incementrando velocidade nos dois motores de 0 até 255 (frente)
-     for(int v = 0; v <= 255; v+= 25){
-        Serial.println(v);
+        case 2: motorA_antihorario();
+                  break;
 
-        AB_horario(v); 
-        delay(500);
+        case 3: motorB_horario();
+                  break;
+
+        case 4: motorB_antihorario();
+                  break;
+
+        case 5: pararMotores();
+                  break;
+
+        case 6: motoresHorario();
+                  break;
+
+        case 7: testePWM();
+                  break;
+
+        default: Serial.println("Comando inválido.");
+                 break;
     }
-
-    //trás
-     for(int v = 0; v <= 255; v+= 25){
-        Serial.println(v);
-
-        AB_antihorario(v); 
-        delay(500);
-    }
-
-    delay(1000);
-
-    //parando
-    AB_parados();
-    delay(500);
 }
+
+//---------- Fim :D ----------
